@@ -1,0 +1,133 @@
+#include <iostream>
+using namespace std;
+
+int count = 0;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* front = NULL;
+Node* rear = NULL;
+
+void Enque(int value) {
+
+    Node* newNode = new Node();
+
+    newNode->data = value;
+    newNode->next = NULL;
+
+    
+    if (rear == NULL) {
+        front = rear = newNode;
+    }
+    else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    count++;
+
+    cout << value << " Enqueued successfully" << endl;
+}
+
+void Deque() {
+
+    if (front == NULL) {
+        cout << "Queue is Empty" << endl;
+        return;
+    }
+
+    Node* temp = front;
+
+    front = front->next;
+
+    delete temp;
+
+    count--;
+
+   
+    if (front == NULL) {
+        rear = NULL;
+    }
+
+    cout << "Deleted Successfully" << endl;
+}
+
+void size() {
+    cout << "Size = " << count << endl;
+}
+
+void isEmpty() {
+
+    if (front == NULL) {
+        cout << "Queue is Empty" << endl;
+    }
+    else {
+        cout << "Queue is not Empty" << endl;
+    }
+}
+
+void Rear() {
+
+    if (rear == NULL) {
+        cout << "Queue is Empty" << endl;
+        return;
+    }
+
+    cout << "Rear element is: " << rear->data << endl;
+}
+
+void Front() {
+
+    if (front == NULL) {
+        cout << "Queue is Empty" << endl;
+        return;
+    }
+
+    cout << "Front element is: " << front->data << endl;
+}
+
+void display() {
+
+    Node* temp = front;
+
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+
+    cout << endl;
+}
+
+int main() {
+
+    size();
+
+    Enque(2021);
+    Enque(1950);
+    Enque(1856);
+    Enque(1535);
+    Enque(1469);
+
+    display();
+
+    Front();
+
+    isEmpty();
+
+    Deque();
+
+    Rear();
+
+    Enque(1947);
+
+    display();
+
+    Enque(2000);
+
+    Front();
+
+    size();
+}
